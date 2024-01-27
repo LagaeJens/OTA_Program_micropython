@@ -1,4 +1,4 @@
-# ESP Data Management System
+# ESP OTA
 
 This repository contains the code for OTA for ESP devices running micropython. The system utilizes Apache2 for serving PHP scripts to manage ESP data files.
 
@@ -12,63 +12,45 @@ sudo apt install apache2 -y
 sudo apt install php -y
 ```
 
-## Installation
+## Installation server side
 
 1. **Clone this repository:**
 
    ```bash
-   git clone https://github.com/your-username/esp-data-management.git
+   git clone https://github.com/LagaeJens/OTA_Program_micropython.git
    ```
 
 2. **Move into the project directory:**
 
    ```bash
-   cd esp-data-management
+   cd OTA_Program_micropython
    ```
 
-3. **Navigate to the HTML directory:**
+3. **Move the server_side files into the Apache2 root directory:**
 
    ```bash
-   cd /var/www/html
+   sudo mv server_side/* /var/www/html/
    ```
 
-4. **Create a new PHP file for retrieving ESP data:**
+4. **GO to the Apache2 root directory:**
 
    ```bash
-   sudo nano get_ESP_data.php
+   cd /var/www/
    ```
 
-   ```php
-   <?php
-     $file = $_GET['file'];
-     $dir = getcwd();
-     $file = $dir.'/'.$file;
-     $myfile = fopen($file, "r") or die("FAIL");
-     echo file_get_contents($file);
-     fclose($myfile);
-   ?>
-   ```
-
-5. **Create a new PHP file for deleting ESP data:**
-
-   ```bash
-   sudo nano delete_ESP_data.php
-   ```
-
-   ```php
-   <?php
-     $file = $_GET['file'];
-     $dir = getcwd();
-     $file = $dir.'/'.$file;
-     unlink($file);
-   ?>
-   ```
-
-6. **Edit permissions:**
+5. **Edit permissions:**
 
    ```bash
     sudo chmod 777 html/*
    ```
+
+**There is also a script called one_run_deploy.sh that you can use to automatically do the above listed steps**
+
+## Installation ESP side
+
+**Place the files found in the ESP_side folder manually onto your esp**
+
+**Or you can use the one_click install to automatically deploy it onto the esp with ampy**
 
 ## Usage
 
